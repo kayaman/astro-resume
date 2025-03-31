@@ -1,32 +1,37 @@
 {
-  "name": "magj-resume",
+  "name": "astro-resume",
   "type": "module",
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "npx playwright install",
     "dev": "astro dev",
     "start": "astro dev",
     "generate-pdf": "node ./scripts/generate-pdf.js",
     "generate-pdf:ci": "PDF_VIEW=true start-server-and-test http://localhost:4321 generate-pdf",
-    "prebuild": "astro telemetry disable && astro check && tsc --noEmit",
-    "build": "astro build",
+    "prebuild": "astro check && tsc --noEmit",
+    "build": "yarn generate-pdf:ci && astro build",
     "build:light": "FORCE_THEME=light astro build",
     "build:dark": "FORCE_THEME=dark astro build"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^5.1.2",
-    "@fontsource/poppins": "^5.1.0",
-    "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^22.7.7",
-    "prettier": "^3.3.3",
+    "@astrojs/tailwind": "^5.1.4",
+    "@fontsource/poppins": "^5.1.1",
+    "@netlify/plugin-lighthouse": "^3.0.0",
+    "@playwright/test": "^1.50.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^22.13.8",
+    "netlify-plugin-playwright-cache": "^0.0.1",
+    "prettier": "^3.5.2",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3"
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "start-server-and-test": "^2.0.10",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^3.1.8",
-    "astro": "^4.16.6"
+    "@astrojs/mdx": "^4.2.2",
+    "astro": "^5.4.1"
   }
 }
